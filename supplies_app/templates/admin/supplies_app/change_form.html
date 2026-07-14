@@ -1,0 +1,19 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    {% if manage_consumables_url %}
+        <li>
+            <a href="{{ manage_consumables_url }}" class="historylink" style="background: #79aec8; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none;">
+                ⚙️ Управление расходниками
+            </a>
+        </li>
+    {% endif %}
+    {% if manage_devices_url %}
+        <li>
+            <a href="{{ manage_devices_url }}" class="historylink" style="background: #79aec8; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none;">
+                ⚙️ Управление устройствами
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}

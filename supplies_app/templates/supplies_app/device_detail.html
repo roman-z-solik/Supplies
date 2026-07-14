@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ device }}</title>
+    <style>
+        body { font-family: Arial; max-width: 900px; margin: 40px auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 8px 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f2f2f2; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .photo { max-width: 200px; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'supplies_app:index' %}">← На главную</a> |
+    <a href="javascript:history.back()">← Назад</a>
+    <h1>{{ device }}</h1>
+
+    {% if device.photo %}
+        <div style="margin: 20px 0;">
+            <a href="{{ device.photo.url }}" target="_blank" style="display: inline-block; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <img src="{{ device.photo.url }}" alt="{{ device }}" style="width: 300px; height: 300px; object-fit: contain; display: block; background: #f8f9fa; cursor: pointer;">
+            </a>
+            <p style="font-size: 0.9em; color: #6c757d; margin-top: 5px;">Нажмите на фото для увеличения</p>
+        </div>
+    {% endif %}
+
+    <h2>Совместимые расходные материалы</h2>
+    {% if consumables %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Артикул</th>
+                    <th>Производитель</th>
+                    <th>Тип</th>
+                    <th>Цвет</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in consumables %}
+                    <tr>
+                        <td><a href="{% url 'supplies_app:consumable_detail' item.id %}">{{ item.name }}</a></td>
+                        <td>{{ item.part_number }}</td>
+                        <td>{{ item.vendor.name|default:"—" }}</td>
+                        <td>{{ item.consumable_type.name|default:"—" }}</td>
+                        <td>{{ item.color.name|default:"—" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Нет совместимых расходников.</p>
+    {% endif %}
+</body>
+</html>

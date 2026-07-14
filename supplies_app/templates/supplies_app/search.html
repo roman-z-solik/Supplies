@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты поиска</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .result {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            margin-top: 30px;
+        }
+        .empty-message {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'supplies_app:index' %}" class="back-link">← На главную</a>
+    <h1>Результаты поиска по запросу: "{{ query }}"</h1>
+
+    <h2 class="section-title">📟 Устройства</h2>
+    {% if device_results %}
+        {% for device in device_results %}
+            <div class="result">
+                <a href="{% url 'supplies_app:device_detail' device.id %}">{{ device }}</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-message">Нет устройств по вашему запросу.</div>
+    {% endif %}
+
+    <h2 class="section-title">🛢️ Расходные материалы</h2>
+    {% if consumable_results %}
+        {% for consumable in consumable_results %}
+            <div class="result">
+                <a href="{% url 'supplies_app:consumable_detail' consumable.id %}">{{ consumable.name }}</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-message">Нет расходников по вашему запросу.</div>
+    {% endif %}
+</body>
+</html>
