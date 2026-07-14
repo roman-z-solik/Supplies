@@ -46,7 +46,7 @@ class ConsumableCompatibilityInline(admin.TabularInline):
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ('vendor', 'device_type', 'model_name')
+    list_display = ('display_name',)
     list_filter = ('vendor', 'device_type')
     search_fields = ('model_name', 'vendor__name')
     inlines = [ConsumableCompatibilityInline]
@@ -59,6 +59,17 @@ class DeviceAdmin(admin.ModelAdmin):
             'description': 'Загрузите фото устройства'
         }),
     )
+
+    def display_name(self, obj):
+        return str(obj)
+    display_name.short_description = 'Устройство'
+    display_name.admin_order_field = 'model_name'
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['manage_consumables_url'] = f'/admin/device/{object_id}/manage_consumables/'
+        return super().change_view(request, object_id, form_url, extra_context=extra_context)
+
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
