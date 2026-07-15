@@ -1,90 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Справочник совместимости</title>
-    <style>
-        body {
-            font-family: Arial;
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+{% extends "base.html" %}
+
+{% block title %}Главная — Справочник совместимости{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 20px;
+    }
+    .block {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 30px 25px;
+        background: #fafafa;
+        text-align: center;
+        transition: 0.2s;
+    }
+    .block:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .block h2 {
+        margin-top: 0;
+        font-size: 1.6em;
+    }
+    .block p {
+        color: #555;
+    }
+    .block input[type="text"] {
+        width: 80%;
+        padding: 10px 14px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    .block button {
+        padding: 10px 24px;
+        font-size: 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .block button:hover {
+        background: #0056b3;
+    }
+    .block .catalog-link {
+        display: inline-block;
+        margin-top: 18px;
+        font-weight: bold;
+        color: #007bff;
+        text-decoration: none;
+    }
+    .icon {
+        font-size: 2.4em;
+        display: block;
+        margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
         .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
-        .block {
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 30px 25px;
-            background: #fafafa;
-            text-align: center;
-            transition: 0.2s;
-        }
-        .block:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-        .block h2 {
-            margin-top: 0;
-            font-size: 1.6em;
-        }
-        .block p {
-            margin: 10px 0 20px;
-            color: #555;
-        }
-        .block input[type="text"] {
-            width: 80%;
-            padding: 10px 14px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        .block button {
-            padding: 10px 24px;
-            font-size: 16px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .block button:hover {
-            background: #0056b3;
-        }
-        .block .catalog-link {
-            display: inline-block;
-            margin-top: 18px;
-            font-weight: bold;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .block .catalog-link:hover {
-            text-decoration: underline;
-        }
-        .icon {
-            font-size: 2.4em;
-            display: block;
-            margin-bottom: 6px;
-        }
-        @media (max-width: 700px) {
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>📦 Справочник совместимости расходных материалов</h1>
+    }
+</style>
+{% endblock %}
+
+{% block navigation %}
+    {# на главной не показываем ссылку "На главную" #}
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;">📦 Справочник совместимости расходных материалов</h1>
 
     <div class="grid">
-        <!-- Блок УСТРОЙСТВА -->
         <div class="block">
             <span class="icon">🖨️</span>
             <h2>Устройства</h2>
@@ -98,7 +90,6 @@
             <a href="{% url 'supplies_app:device_list' %}" class="catalog-link">📋 Весь каталог устройств</a>
         </div>
 
-        <!-- Блок РАСХОДНИКИ -->
         <div class="block">
             <span class="icon">🧴</span>
             <h2>Расходные материалы</h2>
@@ -109,8 +100,7 @@
                 <button type="submit">🔍 Найти</button>
             </form>
             <br>
-            <a href="{% url 'supplies_app:consumable_list' %}" class="catalog-link">📋 Весь каталог расходников</a>
+            <a href="{% url 'supplies_app:consumable_list' %}" class="catalog-link">📋 Весь каталог расходных материалов</a>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
