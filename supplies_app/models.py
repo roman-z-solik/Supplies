@@ -91,7 +91,7 @@ class Consumable(models.Model):
     )
     part_number = models.CharField(
         'Артикул производителя',
-        max_length=100,
+        max_length=500,
         unique=True,
         help_text='Оригинальный номер производителя'
     )
