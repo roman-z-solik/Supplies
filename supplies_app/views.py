@@ -23,7 +23,7 @@ def manage_consumables(request, device_id):
     vendor_id = request.GET.get('vendor')
     consumable_type_id = request.GET.get('consumable_type')
 
-    consumables = Consumable.objects.all()
+    consumables = Consumable.objects.all().order_by('consumable_type__name', 'vendor__name', 'name')
     if vendor_id:
         consumables = consumables.filter(vendor_id=vendor_id)
     if consumable_type_id:
@@ -64,7 +64,7 @@ def manage_devices(request, consumable_id):
     vendor_id = request.GET.get('vendor')
     device_type_id = request.GET.get('device_type')
 
-    devices = Device.objects.all()
+    devices = Device.objects.all().order_by('device_type__name', 'vendor__name', 'model_name')
     if vendor_id:
         devices = devices.filter(vendor_id=vendor_id)
     if device_type_id:

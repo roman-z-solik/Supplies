@@ -50,6 +50,7 @@ class DeviceAdmin(admin.ModelAdmin):
     list_filter = ('vendor', 'device_type')
     search_fields = ('model_name', 'vendor__name')
     inlines = [ConsumableCompatibilityInline]
+    ordering = ('device_type__name', 'vendor__name', 'model_name')
     fieldsets = (
         (None, {
             'fields': ('vendor', 'device_type', 'model_name')
@@ -83,6 +84,7 @@ class ConsumableAdmin(admin.ModelAdmin):
     list_filter = ('vendor', 'consumable_type', 'color')
     search_fields = ('name', 'part_number')
     inlines = [DeviceCompatibilityInline]
+    ordering = ('consumable_type__name', 'vendor__name')
     fieldsets = (
         (None, {
             'fields': ('vendor', 'consumable_type', 'color', 'part_number')
