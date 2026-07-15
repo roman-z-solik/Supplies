@@ -1,40 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Результаты поиска</title>
-    <style>
-        body {
-            font-family: Arial;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .result {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            margin-top: 30px;
-        }
-        .empty-message {
-            color: #6c757d;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
-    <a href="{% url 'supplies_app:index' %}" class="back-link">← На главную</a>
+{% extends "base.html" %}
+
+{% block title %}Результаты поиска — Справочник совместимости{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .result {
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+    }
+    .empty-message {
+        color: #6c757d;
+        font-style: italic;
+    }
+    .section-title {
+        margin-top: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
     <h1>Результаты поиска по запросу: "{{ query }}"</h1>
 
     <h2 class="section-title">📟 Устройства</h2>
@@ -45,7 +29,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class="empty-message">Нет устройств по вашему запросу.</div>
+        <div class="empty-message">Устройства не найдены.</div>
     {% endif %}
 
     <h2 class="section-title">🛢️ Расходные материалы</h2>
@@ -56,7 +40,6 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class="empty-message">Нет расходников по вашему запросу.</div>
+        <div class="empty-message">Расходные материалы не найдены.</div>
     {% endif %}
-</body>
-</html>
+{% endblock %}

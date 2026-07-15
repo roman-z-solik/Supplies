@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Справочник совместимости{% endblock %}</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.png' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #ffffff;
+            color: #222;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    {% block navigation %}
+        <a href="{% url 'supplies_app:index' %}" class="back-link">← На главную</a>
+    {% endblock %}
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <hr>
+        <p style="text-align: center; color: #6c757d; font-size: 0.9em;">
+            Справочник совместимости расходных материалов
+        </p>
+    {% endblock %}
+</body>
+</html>
