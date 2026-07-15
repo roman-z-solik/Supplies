@@ -1,28 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ device }}</title>
-    <style>
-        body { font-family: Arial; max-width: 900px; margin: 40px auto; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 8px 12px; border: 1px solid #ddd; text-align: left; }
-        th { background: #f2f2f2; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .photo { max-width: 200px; }
-    </style>
-</head>
-<body>
-    <a href="{% url 'supplies_app:index' %}">← На главную</a> |
-    <a href="javascript:history.back()">← Назад</a>
+{% extends "base.html" %}
+
+{% block title %}{{ device }} — Справочник совместимости{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .photo-container {
+        margin: 20px 0;
+    }
+    .photo-container img {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f8f9fa;
+        cursor: pointer;
+    }
+    .photo-container .hint {
+        font-size: 0.9em;
+        color: #6c757d;
+        margin-top: 5px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background: #f2f2f2;
+    }
+</style>
+{% endblock %}
+
+{% block navigation %}
+    <a href="{% url 'supplies_app:index' %}" class="back-link">← На главную</a> |
+    <a href="javascript:history.back()" class="back-link">← Назад</a>
+{% endblock %}
+
+{% block content %}
     <h1>{{ device }}</h1>
 
     {% if device.photo %}
-        <div style="margin: 20px 0;">
-            <a href="{{ device.photo.url }}" target="_blank" style="display: inline-block; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                <img src="{{ device.photo.url }}" alt="{{ device }}" style="width: 300px; height: 300px; object-fit: contain; display: block; background: #f8f9fa; cursor: pointer;">
+        <div class="photo-container">
+            <a href="{{ device.photo.url }}" target="_blank">
+                <img src="{{ device.photo.url }}" alt="{{ device }}">
             </a>
-            <p style="font-size: 0.9em; color: #6c757d; margin-top: 5px;">Нажмите на фото для увеличения</p>
+            <p class="hint">Нажмите на фото для увеличения</p>
         </div>
     {% endif %}
 
@@ -51,7 +79,6 @@
             </tbody>
         </table>
     {% else %}
-        <p>Нет совместимых расходников.</p>
+        <p>Нет совместимых расходных материалов.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}
