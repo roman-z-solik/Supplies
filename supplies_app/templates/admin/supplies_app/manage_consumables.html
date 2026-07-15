@@ -42,11 +42,8 @@
             <thead>
                 <tr>
                     <th style="width: 30px;"><input type="checkbox" id="select-all" onchange="toggleAll(this)"></th>
-                    <th>Название</th>
+                    <th>Расходный материал</th>
                     <th>Артикул</th>
-                    <th>Производитель</th>
-                    <th>Тип</th>
-                    <th>Цвет</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,11 +53,8 @@
                             <input type="checkbox" name="consumables" value="{{ consumable.id }}"
                                    {% if consumable.id in existing_ids %}checked{% endif %}>
                         </td>
-                        <td>{{ consumable.name }}</td>
+                        <td>{{ consumable }}</td>
                         <td>{{ consumable.part_number }}</td>
-                        <td>{{ consumable.vendor.name|default:"—" }}</td>
-                        <td>{{ consumable.consumable_type.name|default:"—" }}</td>
-                        <td>{{ consumable.color.name|default:"—" }}</td>
                     </tr>
                 {% empty %}
                     <tr>

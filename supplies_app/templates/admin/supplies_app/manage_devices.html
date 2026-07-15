@@ -43,8 +43,6 @@
                 <tr>
                     <th style="width: 30px;"><input type="checkbox" id="select-all" onchange="toggleAll(this)"></th>
                     <th>Устройство</th>
-                    <th>Производитель</th>
-                    <th>Тип</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,9 +52,7 @@
                             <input type="checkbox" name="devices" value="{{ device.id }}"
                                    {% if device.id in existing_ids %}checked{% endif %}>
                         </td>
-                        <td>{{ device.model_name }}</td>
-                        <td>{{ device.vendor.name|default:"—" }}</td>
-                        <td>{{ device.device_type.name|default:"—" }}</td>
+                        <td>{{ device }}</td>
                     </tr>
                 {% empty %}
                     <tr>
